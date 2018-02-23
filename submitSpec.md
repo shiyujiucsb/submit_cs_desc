@@ -47,15 +47,16 @@ The files on the back-end are generated as follows:
 3. The files under **Select Expected Files** must appear in ``src``, and each of them can be copied to ``execution_files`` by selecting the box *Copy to Execution Environment*.
 
 ### Worker details
-When selectively copying the souce files in ``src`` to ``execution_files``, the worker first checks if the program to run is one of the follows:
+When selectively copying the souce files in ``src`` to ``tmp_dir``, the worker first checks if the program to run (assuming to be the first argument of the command) is one of the follows:
 * bash/sh
 * head/tail
 * python/python2/python3
 * spim
 * valgrind
 
-If so, the worker only copies the scripts that appear in the command to run. For example, if the command is ``python3 main.py``, then worker only copies ``main.py`` from ``src`` to ``tmp_dir``.
-If not, the worker only sets the first argument in the command as the binary file to run. For example, a C++ program generates a binary ``a.out``. If the command is ``./a.out``, the worker only sets the path of ``a.out`` as the path of the executable file.
+Then:
+* If so, the worker only copies the scripts that appear in the command to run. For example, if the command is ``python3 main.py``, then worker only copies ``main.py`` from ``src`` to ``tmp_dir``.
+* If not, the worker only tries to find the binary file in ``src`` (given by the first argument in the command) to run. For example, a C++ program generates a binary ``a.out``. If the command is ``./a.out``, the worker only sets the path of ``a.out`` as the path of the executable file. Note that in this case *no file is copied*. The executable binary will be run later with ``tmp_dir`` as the working directory.
 
 ### stdin, stdout and stderr
 These concepts are the same as in [Linux](https://en.wikipedia.org/wiki/Standard_streams).
