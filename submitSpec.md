@@ -54,8 +54,8 @@ When selectively copying the souce files in ``src`` to ``execution_files``, the 
 * spim
 * valgrind
 
-If so, the worker only copies the scripts that appear in the command to run. For example, if the command is ``python3 main.py``, then worker only copies ``main.py`` from ``src`` to ``execution_files``.
-If not, the worker only copies the binary file in the command to run. For example, a C++ program generates a binary ``a.out``. If the command is ``./a.out``, the worker only copies ``a.out`` from ``src`` to ``execution_files``.
+If so, the worker only copies the scripts that appear in the command to run. For example, if the command is ``python3 main.py``, then worker only copies ``main.py`` from ``src`` to ``tmp_dir``.
+If not, the worker only sets the first argument in the command as the binary file to run. For example, a C++ program generates a binary ``a.out``. If the command is ``./a.out``, the worker only sets the path of ``a.out`` as the path of the executable file.
 
 ### stdin, stdout and stderr
 These concepts are the same as in [Linux](https://en.wikipedia.org/wiki/Standard_streams).
