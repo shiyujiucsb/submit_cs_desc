@@ -3,7 +3,7 @@ This document describes the steps to process a submission on submit.cs.
 Please see [the code on github](https://github.com/ucsb-cs/submit/blob/master/submit/workers/worker.py) for details.
 
 ## Overview
-The front-end puts all the files (build files, execution files, source files that are submitted by the student) into different paths:
+The front-end puts all the files (source files that are submitted by the student, build files, execution files, Makefile) into different paths:
 ```
 worker   # initial working directory
 +--  src
@@ -18,7 +18,7 @@ worker   # initial working directory
 Makefile
 ```
 The front-end sends a JSON file ``data.json`` to the back-end, in which three fields are given:
-* ``executable``: the name of the executable binary submitted by the student that is supposed to be run. This field is rarely useful.
+* ``executable``: the name of the executable binary (which could be submitted by the student) that is supposed to be run. This field is rarely useful, since the worker can find the executable file based on the command of each test case.
 * ``make_target``: make target, which entry in the Makefile to use.
 * ``test_cases``: containing all the test cases.
 
@@ -44,7 +44,7 @@ After all the test cases are finished, the worker dumps the dictionary ``results
 The files on the back-end are generated as follows:
 1. The files under **Select Build Files** are put in ``src`` (*to be confirmed*).
 2. The files under **Select Execution Files** are put in ``execution_files``.
-3. The files under **Select Expected Files** must appear in ``src``, and each of them can be copied to ``execution_files`` by selecting the box *Copy to Execution Environment*.
+3. The files under **Select Expected Files** must appear in ``src``, and each of them can be copied to ``execution_files`` before building the project by selecting the box *Copy to Execution Environment*. These copied source files will be copied to ``tmp_dir`` later.
 
 ### Worker details
 When selectively copying the souce files in ``src`` to ``tmp_dir``, the worker first checks if the program to run (assuming to be the first argument of the command) is one of the follows:
