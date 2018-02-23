@@ -37,7 +37,7 @@ After ``make``, the generated binary files are in the folder ``src``. The worker
 4. Run the program with ``tmp_dir`` as the working directory, and keep the outputs in the Python dictionary ``results``.
 5. Remove ``tmp_dir`` entirely.
 
-After all the test cases are finished, the worker dumps the dictionary ``results`` as a JSON file and put it in the folder ``results``. Then typically ``diff`` is run to compare the output results with the expected. Finally the comparison results are sent back to the front-end. 
+After all the test cases are finished, the worker dumps the dictionary ``results`` into a file and puts it in the folder ``results``. Then typically ``diff`` is run to compare the output results with the expected. Finally the comparison results are sent back to the front-end. 
 
 ## Notes
 ### Front-end operations
